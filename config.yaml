@@ -1,0 +1,50 @@
+# ---------------------------------------------------------------------------
+# machine-vision configuration
+#
+# Priority: command-line flags > this file > built-in defaults.
+#   python src/realtime_vision.py --conf 0.5   # flags always win
+#
+# Everything here maps onto the matching argparse destination, so any
+# --flag-name in the CLI can be pinned here by its dest name (see
+# src/utils/config.py for the explicit mappings).
+# ---------------------------------------------------------------------------
+
+# --- models -----------------------------------------------------------------
+models:
+  det: models/yolov8m.pt          # COCO detector (exported to OpenVINO on setup)
+  pose: models/yolov8n-pose.pt    # 17-keypoint human pose
+  seg: models/yolov8n-seg.pt      # person masks for --bg-blur / --bg-remove
+
+# --- inference --------------------------------------------------------------
+inference:
+  backend: auto                   # auto | openvino | torch
+  device: intel:gpu               # OpenVINO device: intel:gpu, intel:cpu, intel:npu
+  imgsz: 640                      # torch only - OpenVINO bakes its size at export
+  pose_imgsz: 640
+  conf: 0.35                      # general confidence threshold
+  pose_conf: 0.50
+  threads: 0                      # torch threads per model, 0 = auto
+  mirror: true                    # selfie-style preview (single flip point)
+
+# --- distance / calibration -------------------------------------------------
+distance:
+  person_height: 1.90             # metres, used by the pinhole formula
+  calibration_focal: 700.0        # px, fallback when focal_config.txt is absent
+  focal_config: focal_config.txt  # written by --calibrate, read on startup
+
+# --- feature tuning ---------------------------------------------------------
+features:
+  seg_every: 3                    # run segmentation every N frames
+  depth_every: 3                  # run MiDaS every N frames
+  eyes_every: 2                   # MediaPipe face mesh cadence
+  hands_every: 2                  # MediaPipe hand mesh cadence
+  shape_every: 2                  # OpenCV geometry cadence
+  lowconf: 0.6                    # active-learning threshold
+  lowconf_cooldown: 2.0           # seconds between saved frames
+
+# --- output paths -----------------------------------------------------------
+paths:
+  lowconf_dir: dataset/low_confidence   # PERSONAL CAPTURES - gitignored
+  csv: logs/detections.csv
+  heatmap: gaze_heatmap.png
+  gaze_csv: logs/gaze_points.csv

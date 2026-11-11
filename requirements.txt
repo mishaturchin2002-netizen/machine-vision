@@ -1,0 +1,37 @@
+# ---------------------------------------------------------------------------
+# machine-vision - pinned to the versions this project was measured on.
+# Install:  pip install -r requirements.txt
+# ---------------------------------------------------------------------------
+
+# --- inference core -------------------------------------------------------
+ultralytics==8.4.202
+openvino==2026.4.1
+torch==2.15.0
+torchvision==0.29.2
+onnxruntime==1.31.1          # MiDaS ONNX fast path (save_3d_scene.py)
+onnxscript==0.7.2            # required by torch.onnx.export (dynamo) in torch 2.15
+
+# --- vision / imaging -----------------------------------------------------
+opencv-contrib-python==5.0.0.93   # contrib build: imshow + trackbars
+numpy==2.5.4
+pillow==13.0.0
+scipy==1.18.1                # easyocr dependency, pinned for reproducibility
+
+# --- features -------------------------------------------------------------
+mediapipe==1.2.2             # face landmarks, blendshapes, hand landmarks
+easyocr==1.7.2               # --ocr
+timm==1.0.31                 # required by MiDaS (torch.hub)
+PyAutoGUI==0.9.54            # --gestures: media keys
+
+# --- 3D export ------------------------------------------------------------
+open3d==0.20.0               # save_3d_scene.py -> .ply
+
+# --- config ---------------------------------------------------------------
+PyYAML==6.0.3
+
+# NOTE: emotions are computed from MediaPipe blendshapes, so deepface / fer /
+# FER-2013 are NOT needed (and would add a TensorFlow dependency for no gain).
+#
+# NOTE: `pip install easyocr` pulls opencv-python-headless, which silently
+# replaces the GUI build of cv2 and breaks cv2.imshow. If that happens, run:
+#     pip install --force-reinstall --no-deps opencv-contrib-python==5.0.0.93

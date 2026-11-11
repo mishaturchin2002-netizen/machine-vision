@@ -1,0 +1,94 @@
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+venv/
+.venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*.pyo
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+torchinductor_*/
+.torchinductor/
+*.torchinductor
+
+# ---------------------------------------------------------------------------
+# Model weights - NEVER commit (hundreds of MB, download with download_models.py)
+# ---------------------------------------------------------------------------
+models/
+*.pt
+*.pth
+*.onnx
+*.onnx.data
+*.xml
+*.bin
+*.engine
+*.tflite
+*.task
+
+# ---------------------------------------------------------------------------
+# Logs, telemetry and recorded sessions
+# ---------------------------------------------------------------------------
+logs/
+*.csv
+*.log
+stdout.log
+stderr.log
+
+# ---------------------------------------------------------------------------
+# User data: active-learning frames, calibration, exported scenes
+# These are personal captures - keep them out of the repository.
+# ---------------------------------------------------------------------------
+dataset/
+**/low_confidence/
+**/frames/
+focal_config.txt
+gaze_heatmap.png
+scene_3d.ply
+*.ply
+
+# ---------------------------------------------------------------------------
+# Large demo media (keep small PNG previews, not videos)
+# ---------------------------------------------------------------------------
+assets/demo_*.mp4
+assets/demo_*.webm
+assets/demo.gif
+*.mp4
+*.avi
+*.mov
+
+# ---------------------------------------------------------------------------
+# Local configuration / secrets
+# ---------------------------------------------------------------------------
+.env
+.env.*
+config.local.yaml
+secrets.yaml
+
+# ---------------------------------------------------------------------------
+# Editors and OS
+# ---------------------------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------------------------------------------------------------------------
+# Local scratch
+# ---------------------------------------------------------------------------
+*.bak
+*.tmp
+_split_vision.py
