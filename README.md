@@ -2,7 +2,7 @@
 
 # Machine Vision
 
-Real-time computer vision on a webcam: YOLOv8 detection + tracking, pose and action recognition, gaze, gestures, depth and 3D export — all accelerated with OpenVINO on Intel Arc.
+Real-time computer vision on a webcam: YOLOv8 detection + tracking, pose and action recognition, gaze, gestures, depth and 3D export. The YOLO detection and pose models can use OpenVINO on Intel Arc.
 
 ## Quick start
 
@@ -13,7 +13,7 @@ scripts\setup.bat          :: 1. creates .venv, installs deps, downloads models
 scripts\start_vision.bat   :: 2. starts the default profile
 ```
 
-**Linux / macOS**
+**Linux**
 
 ```bash
 bash scripts/setup.sh                 # 1. venv + deps + models
@@ -31,9 +31,11 @@ python src/realtime_vision.py --track --speed --eyes   # 2. run
 ![Ultralytics](https://img.shields.io/badge/Ultralytics-YOLOv8-FF6F00)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+> The default configuration can save webcam frames with low-confidence detections under `dataset/low_confidence`. Add `--no-lowconf` to disable frame saving.
+
 ## Features
 
-Every feature is opt-in. With no flags you get the light profile (detection + pose + actions + distance) at **~18 FPS**.
+With no flags you get the light profile (detection + pose + actions + distance) at **~18 FPS**.
 
 | Flag | What it does | FPS cost |
 |---|---|---|
@@ -111,7 +113,7 @@ cd machine-vision
 scripts\setup.bat
 ```
 
-### Linux / macOS
+### Linux
 
 ```bash
 git clone https://github.com/mishaturchin2002-netizen/machine-vision.git
@@ -138,7 +140,7 @@ python src/realtime_vision.py --async-grab --track --speed
 python src/realtime_vision.py --bg-blur --track
 python src/realtime_vision.py --eyes --heatmap
 python src/realtime_vision.py --depth-map
-python src/realtime_vision.py --all              # everything except depth
+python src/realtime_vision.py --all              # enable gaze, gestures and air drawing
 ```
 
 Windows: `scripts\start_vision.bat [flags]`.
@@ -164,7 +166,7 @@ Measured on Intel Core Ultra 7 155H (Arc iGPU), 640×480 webcam, YOLOv8m exporte
 |---|---|---|
 | torch CPU, det+pose | 178 ms | 5.6 |
 | OpenVINO CPU | 188 ms | 5.3 |
-| **OpenVINO Arc GPU** | **24 ms** | **40.9** |
+| **OpenVINO Arc GPU (backend benchmark)** | **24 ms** | **40.9** |
 | Full pipeline, base profile | 56 ms | 18.0 |
 | Full pipeline, `--all` | 66–71 ms | 14–15 |
 | Capture sync vs async | 73–75 vs 65–66 ms | 13.2–13.6 → 15.1–15.5 |
