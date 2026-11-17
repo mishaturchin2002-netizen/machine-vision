@@ -1,8 +1,10 @@
-# machine-vision
+![Machine Vision](docs/portfolio-banner.svg)
+
+# Machine Vision
 
 Real-time computer vision on a webcam: YOLOv8 detection + tracking, pose and action recognition, gaze, gestures, depth and 3D export — all accelerated with OpenVINO on Intel Arc.
 
-## 🚀 Quick Start
+## Quick start
 
 **Windows**
 
@@ -14,7 +16,8 @@ scripts\start_vision.bat   :: 2. starts the default profile
 **Linux / macOS**
 
 ```bash
-./scripts/setup.sh                    # 1. venv + deps + models
+bash scripts/setup.sh                 # 1. venv + deps + models
+source .venv/bin/activate
 python src/realtime_vision.py --track --speed --eyes   # 2. run
 ```
 
@@ -27,12 +30,6 @@ python src/realtime_vision.py --track --speed --eyes   # 2. run
 ![OpenVINO](https://img.shields.io/badge/OpenVINO-2026.4-6C2BD9)
 ![Ultralytics](https://img.shields.io/badge/Ultralytics-YOLOv8-FF6F00)
 ![License](https://img.shields.io/badge/license-MIT-green)
-
-![demo](assets/demo.gif)
-
-> `assets/demo.gif` is a placeholder — record your own with `start_vision.bat --track --speed` and drop it in.
-
----
 
 ## Features
 
@@ -109,7 +106,7 @@ src/
 ### Windows
 
 ```bat
-git clone <your-repo-url>
+git clone https://github.com/mishaturchin2002-netizen/machine-vision.git
 cd machine-vision
 scripts\setup.bat
 ```
@@ -117,7 +114,7 @@ scripts\setup.bat
 ### Linux / macOS
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/mishaturchin2002-netizen/machine-vision.git
 cd machine-vision
 chmod +x scripts/setup.sh
 ./scripts/setup.sh
